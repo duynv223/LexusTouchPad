@@ -50,7 +50,6 @@
 #include "touchpad.h"
 #include "ps2_io.h"
 #include "mouse.h"
-#include "GLCD.h"
 #include "can.h"
 #include "key.h"
 

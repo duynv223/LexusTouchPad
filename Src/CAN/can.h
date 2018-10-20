@@ -42,7 +42,7 @@ Definitions
 /******************************************************************************
 Exported global variables and functions (to be accessed by other files)
 ******************************************************************************/
-void CAN_Init();
+void CAN_Init(void);
 void CAN_Transmit(CanTxMsgTypeDef *msg);
 void CAN_RegistReceivedMsgHandler(void (*f)(CanRxMsgTypeDef *msg));
 void CAN_RxCpltHandler(void);

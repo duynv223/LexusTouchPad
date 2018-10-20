@@ -24,9 +24,9 @@ Includes
 Definitions
 ******************************************************************************/
 typedef enum{
-	MOUSE_DIR_NONE,
-	MOUSE_DIR_R2L,
-	MOUSE_DIR_L2R
+	MOUSE_DIR_NONE  = 0,
+	MOUSE_DIR_R2L = 2,
+	MOUSE_DIR_L2R = 1
 }MouseDirection_Typedef;
 	
 typedef struct{

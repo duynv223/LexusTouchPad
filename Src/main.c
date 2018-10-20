@@ -37,6 +37,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include <string.h>
 
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
@@ -265,7 +266,6 @@ static void CANReporter_Thread(void const *argument)
 {
 	static CanTxMsgTypeDef msgKey = {0};
 	static CanTxMsgTypeDef msgTouch = {0};
-	static CanTxMsgTypeDef msgTouchPad;
 	osEvent event;
 	UserAction_Typedef *pAction;
 
@@ -293,7 +293,7 @@ static void CANReporter_Thread(void const *argument)
 					pAction = event.value.p;
 					if(pAction->type == USER_ACTION_TYPE_KEY)
 						{
-							log("key\r\n", pAction->data[0]);
+							log("key %d\r\n", pAction->data[0]);
 							msgKey.Data[0] = pAction->data[0];
 							CAN_Transmit(&msgKey);
 						}
@@ -354,6 +354,7 @@ static void KeyPolling_Thread(void const *argument)
 			key = Key_Read();
 			if(key != preKey)
 			{
+				log("read key: %d", key);
 				pAction = osPoolAlloc(mpool);
 				pAction->type = USER_ACTION_TYPE_KEY;
 				pAction->data[0] = key;

@@ -25,7 +25,7 @@ Private Definitions
 #define TOUCHPAD_X_MAX		5500
 #define TOUCHPAD_Y_MAX		4500
 
-#define ABSOLUTE_TO_RELATIVE_SCALE		15
+#define ABSOLUTE_TO_RELATIVE_SCALE		1
 #define SUB_WITH_BOUND(A, B)  (A-B) > 255*ABSOLUTE_TO_RELATIVE_SCALE? 255:(A-B)/ABSOLUTE_TO_RELATIVE_SCALE
 
 typedef enum{
@@ -117,15 +117,14 @@ void MotionPkgReportHandler(Touchpad_MotionPackageTypedef pkg)
 							}
 						else if(pkg.YPos > prePosY)
 							{
-								report.dirY = MOUSE_DIR_R2L;
-								report.deltaY = SUB_WITH_BOUND(pkg.YPos, prePosY);
+								report.dirY = MOUSE_DIR_L2R;
+								report.deltaY = SUB_WITH_BOUND(pkg.YPos, prePosY);	
 							}
 						else
 							{
-								report.dirY = MOUSE_DIR_L2R;
-								report.deltaY = SUB_WITH_BOUND(prePosY, pkg.YPos);
-							}		
-						
+								report.dirY = MOUSE_DIR_R2L;
+								report.deltaY = SUB_WITH_BOUND(prePosY, pkg.YPos);	
+							}	
 
 						g_MouseReportHandler(report);
 						prePosX = pkg.XPos;
@@ -135,8 +134,8 @@ void MotionPkgReportHandler(Touchpad_MotionPackageTypedef pkg)
 			case MOUSE_STATE_REALEASE:
 				report.deltaX = 0;
 				report.deltaY = 0;
-				report.dirX = MOUSE_DIR_NONE;
-				report.dirY = MOUSE_DIR_NONE;
+				report.dirX = 0;
+				report.dirY = 0;
 				report.key = 0;
 				report.finger = 0;
 				g_MouseReportHandler(report);
